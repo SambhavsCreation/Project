@@ -4,6 +4,12 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+
+// PlayFab includes
+#include "PlayFab.h"
+#include "Core/PlayFabError.h"
+#include "Core/PlayFabClientDataModels.h"
+
 #include "MyProject3Character.generated.h"
 
 UCLASS(config=Game)
@@ -51,10 +57,13 @@ protected:
 	/** Handler for when a touch input stops. */
 	void TouchStopped(ETouchIndex::Type FingerIndex, FVector Location);
 
+	
+
 protected:
 	// APawn interface
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	// End of APawn interface
+
 
 public:
 	/** Returns CameraBoom subobject **/

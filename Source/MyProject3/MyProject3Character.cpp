@@ -1,12 +1,19 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "MyProject3Character.h"
+
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/InputComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/Controller.h"
 #include "GameFramework/SpringArmComponent.h"
+
+// PlayFab imports
+#include "Core/PlayFabClientAPI.h"
+
+
+
 
 //////////////////////////////////////////////////////////////////////////
 // AMyProject3Character
@@ -49,6 +56,7 @@ AMyProject3Character::AMyProject3Character()
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
+	UE_LOG(LogTemp,  Warning, TEXT("HOLAAAA"))
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -127,3 +135,6 @@ void AMyProject3Character::MoveRight(float Value)
 		AddMovementInput(Direction, Value);
 	}
 }
+
+
+
