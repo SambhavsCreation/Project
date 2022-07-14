@@ -19,7 +19,6 @@ void ALoginActor::BeginPlay()
 {
 	Super::BeginPlay();
 	GetMutableDefault<UPlayFabRuntimeSettings>()->TitleId = TEXT("E268D");
-
 	clientAPI = IPlayFabModuleInterface::Get().GetClientAPI();
 
 	PlayFab::ClientModels::FLoginWithCustomIDRequest request;
