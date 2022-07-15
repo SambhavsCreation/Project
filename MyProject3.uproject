@@ -34,6 +34,25 @@
 				"Mac",
 				"Linux"
 			]
+		},
+		{
+			"Name": "OnlineSubsystem",
+			"Enabled": true
+		},
+		{
+			"Name": "OnlineSubsystemUtils",
+			"Enabled": true
+		},
+		{
+			"Name": "OnlineSubsystemPlayFab",
+			"Enabled": true,
+			"SupportedTargetPlatforms": [
+				"XboxOneGDK",
+				"WinGDK",
+				"XSX",
+				"Win64",
+				"Switch"
+			]
 		}
 	]
 }
