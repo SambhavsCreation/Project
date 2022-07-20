@@ -180,7 +180,7 @@ void AMyProject3Character::OnLoginError(const PlayFab::FPlayFabCppError& ErrorRe
 	GEngine->AddOnScreenDebugMessage(1, 15, FColor::Red, TEXT("Login Failed"));
 }
 
-void AMyProject3Character::CreateMatchmakingTicket(FString LobbyId)
+void AMyProject3Character::CreateMatchmakingTicket()
 {
 	TSharedPtr<FJsonObject> Attributes = MakeShareable(new FJsonObject());
 	TSharedPtr<FJsonObject> LatencyPtr = MakeShareable(new FJsonObject());

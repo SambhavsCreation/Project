@@ -103,7 +103,7 @@ protected:
 
 	// Matchmaking Delegates
 	UFUNCTION(Exec, Category="Commands")
-	void CreateMatchmakingTicket(FString LobbyId);
+	void CreateMatchmakingTicket();
 	void OnMatchmakingTicketCreationSuccessful(const MultiplayerModels::FCreateMatchmakingTicketResult& MatchmakingTicketResult);
 	void OnMatchmakingFailed(const FPlayFabCppError& Error);
 	void OnMatchmakingTicketFound(const MultiplayerModels::FGetMatchmakingTicketResult&);
