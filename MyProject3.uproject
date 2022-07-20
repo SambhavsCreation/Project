@@ -9,7 +9,7 @@
 			"Type": "Runtime",
 			"LoadingPhase": "Default",
 			"AdditionalDependencies": [
-				"Engine"
+				"Engine",
 			]
 		}
 	],
@@ -47,12 +47,12 @@
 			"Name": "OnlineSubsystemPlayFab",
 			"Enabled": true,
 			"SupportedTargetPlatforms": [
-				"XboxOneGDK",
-				"WinGDK",
-				"XSX",
-				"Win64",
-				"Switch"
+				"Win64"
 			]
+		},
+		{
+			"Name": "PlayFabGSDK",
+			"Enabled": true
 		}
 	]
 }

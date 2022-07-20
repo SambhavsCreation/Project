@@ -3,14 +3,27 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Character.h"
-
-// PlayFab includes
-#include "PlayFab.h"
 #include "Core/PlayFabError.h"
 #include "Core/PlayFabClientDataModels.h"
+#include "PlayFab.h"
+#include "PlayFabMultiplayerDataModels.h"
+#include "GameFramework/Character.h"
 
 #include "MyProject3Character.generated.h"
+
+using namespace PlayFab;
+using namespace ClientModels;
+
+DECLARE_LOG_CATEGORY_EXTERN(LogPlayerOnline, Warning, All)
+
+USTRUCT()
+struct FTestStruct
+{
+	GENERATED_BODY()
+
+	FString Test = TEXT("xyz");
+};
+
 
 UCLASS(config=Game)
 class AMyProject3Character : public ACharacter
@@ -71,6 +84,57 @@ public:
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 
+	UFUNCTION(Exec, Category="Commands")
+	void Login(FString CustomID);
+	
+
+
+protected:
+	virtual void BeginPlay() override;
+	
+	PlayFabClientPtr ClientAPI = nullptr;
+	PlayFabMatchmakerPtr MatchmakerAPI = nullptr;
+	PlayFabMultiplayerPtr MultiplayerAPI = nullptr;
+// Login functions	
+protected:
+	// Login Delegates
+	void OnLoginSuccess(const FLoginResult& Result);
+	void OnLoginError(const FPlayFabCppError& ErrorResult);
+
+	// Matchmaking Delegates
+	UFUNCTION(Exec, Category="Commands")
+	void CreateMatchmakingTicket(FString LobbyId);
+	void OnMatchmakingTicketCreationSuccessful(const MultiplayerModels::FCreateMatchmakingTicketResult& MatchmakingTicketResult);
+	void OnMatchmakingFailed(const FPlayFabCppError& Error);
+	void OnMatchmakingTicketFound(const MultiplayerModels::FGetMatchmakingTicketResult&);
+	FTimerHandle MultiplayerTimer;
+	UFUNCTION()
+	void Trigger_FindMatchmakingTicket();
+	MultiplayerModels::FCreateMatchmakingTicketResult MatchmakingTicket;
+
+	// Match Delegates
+	void OnMatchFoundSuccessful(const MultiplayerModels::FGetMatchResult&);
+
+	// Lobby creation Delegates
+	// UFUNCTION(Exec, Category="Commands")
+	// void CreateLobby();
+	// void OnLobbyCreationSuccessful(const MultiplayerModels::FCreateLobbyResult& Result);
+	// void OnLobbyCreationError(const FPlayFabCppError& Error);
+
+	// Lobby join Delegates
+	// UFUNCTION(Exec, Category="Commands")
+	// void JoinLobby(FString ConnectionString);
+	// void OnJoinLobbySuccessful(const MultiplayerModels::FJoinLobbyResult& JoinLobbyResult);
+	// void OnJoinLobbyError(const FPlayFabCppError& Error);
+
+	// Utils
+	// void LobbyFound(const MultiplayerModels::FGetLobbyResult& LobbyResult);
+
+	
+
+private:
+	FLoginResult PlayerLoginResult;
+	
 	
 };
 

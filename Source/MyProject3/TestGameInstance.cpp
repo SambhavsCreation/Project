@@ -4,8 +4,14 @@
 #include "TestGameInstance.h"
 
 #include "GSDKUtils.h"
+#include "MyProject3Character.h"
 #include "PlayfabGSDK.h"
-#include "Core/PlayFabClientAPI.h"
+#include "PlayFabMultiplayerModels.h"
+
+UTestGameInstance::UTestGameInstance()
+{
+	Http = &FHttpModule::Get();
+}
 
 
 void UTestGameInstance::Init()
@@ -37,30 +43,8 @@ void UTestGameInstance::Init()
 void UTestGameInstance::StartGame()
 {
 	GetMutableDefault<UPlayFabRuntimeSettings>()->TitleId = TEXT("E268D");
-	clientAPI = IPlayFabModuleInterface::Get().GetClientAPI();
-
-	PlayFab::ClientModels::FLoginWithCustomIDRequest request;
-	request.CustomId = TEXT("XYZ");
-	request.CreateAccount = true;
-
-	clientAPI->LoginWithCustomID(
-		request,
-		PlayFab::UPlayFabClientAPI::FLoginWithCustomIDDelegate::CreateUObject(this, &UTestGameInstance::onSuccess),
-		PlayFab::FPlayFabErrorDelegate::CreateUObject(this, &UTestGameInstance::onError)
-	);
-	UE_LOG(LogTemp, Warning, TEXT("Game Instance"))
 	
 	
-}
-
-void UTestGameInstance::onSuccess(const PlayFab::ClientModels::FLoginResult& Result)
-{
-	UE_LOG(LogTemp, Warning, TEXT("Login successful"));
-}
-
-void UTestGameInstance::onError(const PlayFab::FPlayFabCppError& ErrorResult)
-{
-	UE_LOG(LogTemp, Warning, TEXT("Login Failed"))
 }
 
 void UTestGameInstance::OnGSDKShutdown()

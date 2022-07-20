@@ -3,17 +3,13 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "HttpModule.h"
 #include "Engine/GameInstance.h"
 
 #include "PlayFab.h"
-#include "Core/PlayFabError.h"
-#include "Core/PlayFabClientDataModels.h"
 
 #include "TestGameInstance.generated.h"
 
-/**
- * 
- */
 
 UCLASS()
 class MYPROJECT3_API UTestGameInstance : public UGameInstance
@@ -24,9 +20,9 @@ class MYPROJECT3_API UTestGameInstance : public UGameInstance
 
 	virtual void Init() override;
 
-protected:
-	void onSuccess(const PlayFab::ClientModels::FLoginResult& Result);
-	void onError(const PlayFab::FPlayFabCppError& ErrorResult);
+	UTestGameInstance();
+
+
 
 private:
 	PlayFabClientPtr clientAPI = nullptr;
@@ -47,4 +43,11 @@ protected:
 
 public:
 	virtual void OnStart() override;
+	FString PlayerPlayFabID;
+	FString SessionTicket;
+
+	void OnPlayerDataCaptured(FHttpRequestPtr Request, FHttpResponsePtr Response, bool bWasSuccessful);
+
+private:
+	FHttpModule* Http;
 };
